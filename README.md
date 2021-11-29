@@ -64,10 +64,6 @@ $ source secrets.sh
 #Create the PostgreSQL database:
 
 
-start postgresql by typing in (Ubuntu users):
-$ sudo /etc/init.d/postgresql start
-$ sudo -u postgres createdb (dbname)
-
 
 Mac Users:
 $ initdb timekeeperNIA
@@ -78,12 +74,9 @@ $ lsof -i:5432
 $ kill -15 (PID)
 
 $ python3 -i model.py
+$ db.create_all()
+>>>output should show tables from model.py
 
-#Ubuntu:
-$ db.create_all() psql timekeeperNIA
-
-#Mac -be sure to check/manage database inside of Rosetta terminal if M1 chip...
-$ db.create_all() timekeeperNIA
 
 can check database by going through umbuntu or VS code- type in psql timekeeperNIA
 to get into database, then type \dt to pull up list of tables created...then \d tablename
@@ -96,11 +89,9 @@ $ sudo -u postgres dropdb (dbname)
 $ dropdb (dbname)
 
 $ pip3 install -r requirements.txt (once requirements.txt is added to project)
-$ pip3 install cloudinary
 # add API key for Cloudinary to a secrets.sh file, be sure to git-ignore the file to keep the API secret
 $ source secrets.sh
 $ python3 model.py
-$ python3 seeddatabase.py
 $ python3 server.py
 ```
 

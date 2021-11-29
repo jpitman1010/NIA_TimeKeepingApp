@@ -120,13 +120,9 @@ def go_to_user_calendar_page():
     """Takes user to their calendar page."""
 
     email = session['email']
-    book_check = crud.check_database_for_completed_books(email)
 
-    author_id = crud.get_user_id(email)
-    books = crud.get_book_object_list(author_id)
-    app.logger.info("books object-all", books)
 
-    return render_template("calendar.html", books=books)
+    return render_template("calendar.html")
 
 
 @app.route('/time_punch_creation', methods=["POST"])

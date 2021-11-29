@@ -21,7 +21,7 @@ psycopg2-binary==2.9.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 Pygments==2.6.1
-pylint==2.5.3
+pylint
 python-dateutil==2.8.1
 python-magic==0.4.18
 pytz==2020.1

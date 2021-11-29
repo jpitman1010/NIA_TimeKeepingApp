@@ -58,26 +58,6 @@ class TimePunches(db.Model):
         return f"<User ID = {self.user_id}, User Name={self.id}, comments={self.comments}, Time Punch Details={self.created_date}.>"
 
 
-class Page(db.Model):
-    """A Book."""
-    __tablename__ = "pages"
-
-    id = db.Column(db.Integer,
-                   autoincrement=True,
-                   primary_key=True,)
-    book_id = db.Column(db.Integer,
-                        db.ForeignKey('books.id'),)
-    text = db.Column(db.String,)
-    image = db.Column(db.String,)
-    page_number = db.Column(db.Integer,)
-    book = db.relationship('Book', backref='pages',)
-
-    def __repr__(self):
-        """show info about the pages"""
-
-        return f"< Page ID ={self.id},page text={self.text}, page image = {self.image}, page book_id = {self.book_id}, page_number = {self.page_number}>"
-
-
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
