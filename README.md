@@ -2,22 +2,20 @@
 
 ## Tech Stack:
 
-Storybook Creator is a web application for creating and reading storybooks. The tech stack includes:
-
 -Flask (backend web framework)
 
--   Python (backend web framework)
--   SQL Alchemy (interface for back to front end)
--   PSQalchemy
--   Javascript (canvas)
--   Jinja (sessions)
--   JQuery and AJAX (form handling)
--   CSS (front-end)
+- Python (backend web framework)
+- SQL Alchemy (interface for back to front end)
+- PSQalchemy
+- Javascript (canvas)
+- Jinja (sessions)
+- JQuery and AJAX (form handling)
+- CSS (front-end)
 
 # API's Used:
 
--   Cloudinary API
--   St. PageFlip API
+- Cloudinary API
+- St. PageFlip API
 
 # What the web app can do:
 
