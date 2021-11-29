@@ -45,20 +45,24 @@ def route_to_registration_page():
 def user_reg_post_intake():
     """Takes user registration info and makes yummy cookies."""
 
-    error = None
+    print('In user registration app route at top.')
 
     email = request.form.get('email')
     password = request.form.get('password')
+    print(password)
     fname = request.form.get('fname')
+    print(fname)
     lname = request.form.get('lname')
+    print(lname)
 
-    print(request.files, "request-files image-upload")
-    file = request.files['image-upload']
-    app.logger.info(file)
-    response = cloudinary.uploader.upload(file)
-    photo = response['url']
-    app.logger.info(photo)
+    # print(request.files, "request-files image-upload")
+    # file = request.files['image-upload']
+    # app.logger.info('this is the file app logger', file)
+    # response = cloudinary.uploader.upload(file)
+    # photo = response['url']
+    # app.logger.info('this is the photo app logger', photo)
 
+    photo = 'photo text place holder'
     print(email)
     email_check = crud.check_if_valid_user(email)
 

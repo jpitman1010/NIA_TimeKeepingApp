@@ -114,6 +114,15 @@ def delete_time_punch(time_punch_id):
     return deleted_time_punch
 
 
+def admin_check(email):
+    """Checks database to see if user that is attempting to enter admin page is listed as admin."""
+
+
+    admin_confirmation = db.session.query(User.admin).filter_by(email=email).first()
+
+    return admin_confirmation
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+}
+
+Body {
+
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+
+}
+
+.container {
+    height: 100%;
+    position: relative;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.center {
+    padding: 70px 0;
+    text-align: center;
+  }
+
+.clockInButton {
+    background-color: #4CAF50; /* Green */
+  }
+
+.clockOutButton {
+    background-color: red; /* Red */
+  }
+.inputBox {
+    background-color: transparent;
+    font-weight: 500;
+    color:black; 
+    margin-top: 1vw; 
+    margin-bottom: 1vw; 
+    font-size: calc(8px + 2vw);
+    padding-left:8px;
+    justify-content: center;
+    display: inline-block;
+}
+.button {
+    border: none;
+    color: white;
+    padding: 20px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 3rem;
+    margin:10px;
+    font-weight: 500;
+}
+
+.registerButton {
+    background-color: black;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(8px + 1vw);
+    font-weight: 500;
+    border-radius: 1rem;
+    padding-left: calc(62px + 2vw);
+    padding-right: calc(62px + 2vw);
+    padding-top: calc(3px + 1vw);
+    padding-bottom: calc(3px + 1vw);
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+.logInButton {
+    background-color: green;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: calc(8px + 1vw);
+    font-weight: 500;
+    border-radius: 1rem;
+    padding-left: calc(62px + 2vw);
+    padding-right: calc(62px + 2vw);
+    padding-top: calc(3px + 1vw);
+    padding-bottom: calc(3px + 1vw);
+    margin-top:1vw;
+    margin-bottom:1vw;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/style.css">
+
+        <title>Log In</title>
+    </head>
+    <body style="justify-content: center; text-align: center; vertical-align: center;">
+        <div class="container">
+            <div class="center">
+            <br>
+                <div style="margin-top: 15px;">
+                    <form action="/login_form" method='POST'>
+          
+                        <div style="color:rgb(14, 18, 252);font-size: calc(20px + 2vw);font-weight: bolder; ">
+                            Log in.
+                        </div>
+                        <div>
+                            <input type="text" name="email" placeholder="Type email here." class="inputBox">
+                        </div>
+                        <div style="margin-top: 1vw; margin-bottom: 1vw;">
+                            <input type="password" name="password" placeholder="Type password here." class="inputBox">
+                        </div>
+                        <div style="position: relative">
+                            <input class="logInButton" type="submit" id="submit" value="Sign In">
+                        </div>
+                    </form>
+                    <form action="/user_registration_route">
+                        <input class="registerButton" type="submit" id="submit" value="Sign Up" >
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>        
+        
+    </body>
+</html>

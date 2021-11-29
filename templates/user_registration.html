@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/static/style.css" />
+
+    <title>
+        Registration
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="center">
+    
+            <div style="color:blue; font-size: calc(30px + 1vw);font-weight: bolder;">
+                Please enter your information.
+            </div>
+            <br>
+            <!-- <div margin={-5}>
+                Please upload a photo of yourself.
+                <input id="photo" type="file" id="file" class="hide" accept="image/*"/>
+            </div>
+            <br> -->
+            <div>
+                <form id="registration" action="/user_registration" method="POST" enctype="multipart/form-data">
+                    <input type="text" id='email' name="email" placeholder="Type email here." class="inputBox">
+                    <br>
+                    <input id="password" type="password" name="password" placeholder="Type password here." class="inputBox">
+                    <br>
+                    <input type="text" name="fname" id="fname" placeholder="First Name" class="inputBox">
+                    <br>
+                    <input type="text" name="lname" id="lname" placeholder="Last Name" class="inputBox">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit" class="registerButton">
+                </form>
+               
+                <br>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function runMyFunction() {
+            if (document.getElementsByName("name")[0].value == '') {
+                $("#registration").on('submit', () => {
+                            preventDefault();
+                            alert("Please enter value");
+                          
+                        })}
+            if (document.getElementsByName("password")[0].value == '') {
+                $("#registration").on('submit', () => {
+                        preventDefault();
+                        alert("Please enter value");
+                     
+                    }
+                )}
+            if (document.getElementsByName("fname")[0].value == '') {
+                $("#registration").on('submit', () => {
+                        preventDefault();
+                        alert("Please enter value");
+                       
+                    })
+                }
+            if (document.getElementsByName("lname")[0].value == '') {
+                $("#registration").on('submit', () => {
+                        preventDefault();
+                        alert("Please enter value");
+                    
+                    }
+                )}
+                else {
+                    var form = document.getElementsByName("registration")[0];
+                    form.submit();
+                }
+        }
+    </script>
+    <script>
+        $('#registration').on("submit", validate);
+
+        function validate(e) {
+            var registration = $('#registration'),
+                email = registration.find("input[name='email']"),
+                password = registration.find("input[name='password']"),
+                fname = registration.find("input[name='fname']"),
+                lname = registration.find("input[name='lname']"),
+                emailVal = email.val() || "",
+                passwordVal = password.val() || "",
+                fnameVal = fname.val() || "",
+                lnameVal = lname.val() || "",
+                isValid = true;
+
+            if (!emailVal) {
+                email.css({
+                    borderColor: 'red'
+                });
+
+                isValid = false;
+            }
+            if (!passwordVal) {
+                email.css({
+                    borderColor: 'red'
+                });
+                isValid = false;
+            }
+            if (!fnameVal) {
+                email.css({
+                    borderColor: 'red'
+                });
+                isValid = false;
+            }
+            if (!lnameVal) {
+                email.css({
+                    borderColor: 'red'
+                });
+                isValid = false;
+            }
+            if (!isValid) {
+                e.preventDefault(),
+                    alert("Please fill out all the empty sections.");
+            }
+        };
+
+        // var form = $(this)
+        // url = form.attr('action');
+        // var formdata = new FormData(this);
+        // formdata.append('fname', fname);
+        // formdata.append('lname', lname);
+        // formdata.append('email', email);
+        // formdata.append('password', password);
+        // formdata.append('image-upload', imageData);
+        // $.ajax({
+        //         url: url,
+        //         type: "POST",
+        //         data: formdata,
+        //         processData: false,
+        //         contentType: false,
+
+        //     }).done();
+
+    </script>
+   
+</body>

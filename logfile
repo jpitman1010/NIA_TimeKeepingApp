@@ -1,0 +1,32 @@
+2021-11-27 11:51:03.044 EET [10932] LOG:  starting PostgreSQL 14.0 on aarch64-apple-darwin20.6.0, compiled by Apple clang version 13.0.0 (clang-1300.0.29.3), 64-bit
+2021-11-27 11:51:03.045 EET [10932] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-11-27 11:51:03.045 EET [10932] LOG:  listening on IPv6 address "::1", port 5432
+2021-11-27 11:51:03.046 EET [10932] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2021-11-27 11:51:03.048 EET [10933] LOG:  database system was shut down at 2021-11-27 11:47:40 EET
+2021-11-27 11:51:03.050 EET [10932] LOG:  database system is ready to accept connections
+2021-11-27 13:40:59.897 EET [18627] FATAL:  lock file "postmaster.pid" already exists
+2021-11-27 13:40:59.897 EET [18627] HINT:  Is another postmaster (PID 10932) running in data directory "/Users/juliepitman/Desktop/currentCoding/timekeepingNotReact/timekeeperNIA"?
+2021-11-27 13:43:08.063 EET [18806] FATAL:  lock file "postmaster.pid" already exists
+2021-11-27 13:43:08.063 EET [18806] HINT:  Is another postmaster (PID 10932) running in data directory "/Users/juliepitman/Desktop/currentCoding/timekeepingNotReact/timekeeperNIA"?
+2021-11-27 13:44:39.029 EET [18931] ERROR:  database "timekeeperNIA" does not exist
+2021-11-27 13:44:39.029 EET [18931] STATEMENT:  DROP DATABASE "timekeeperNIA";
+2021-11-27 13:46:11.550 EET [19063] FATAL:  database "timeKeeperNIA" does not exist
+2021-11-27 13:47:05.047 EET [19129] FATAL:  database "timekeeperNIA" does not exist
+2021-11-27 13:49:32.443 EET [19254] FATAL:  lock file "postmaster.pid" already exists
+2021-11-27 13:49:32.443 EET [19254] HINT:  Is another postmaster (PID 10932) running in data directory "/Users/juliepitman/Desktop/currentCoding/timekeepingNotReact/timekeeperNIA"?
+2021-11-27 13:53:40.096 EET [10932] LOG:  received smart shutdown request
+2021-11-27 13:53:40.100 EET [10932] LOG:  background worker "logical replication launcher" (PID 10939) exited with exit code 1
+2021-11-27 13:53:40.100 EET [10934] LOG:  shutting down
+2021-11-27 13:53:40.106 EET [10932] LOG:  database system is shut down
+2021-11-27 13:57:48.797 EET [19870] LOG:  starting PostgreSQL 14.0 on aarch64-apple-darwin20.6.0, compiled by Apple clang version 13.0.0 (clang-1300.0.29.3), 64-bit
+2021-11-27 13:57:48.798 EET [19870] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-11-27 13:57:48.798 EET [19870] LOG:  listening on IPv6 address "::1", port 5432
+2021-11-27 13:57:48.799 EET [19870] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2021-11-27 13:57:48.801 EET [19871] LOG:  database system was shut down at 2021-11-27 13:53:40 EET
+2021-11-27 13:57:48.803 EET [19870] LOG:  database system is ready to accept connections
+2021-11-27 17:25:06.322 EET [32266] ERROR:  database "timekeeperNIA" does not exist
+2021-11-27 17:25:06.322 EET [32266] STATEMENT:  DROP DATABASE "timekeeperNIA";
+2021-11-29 09:56:49.987 EET [19870] LOG:  received smart shutdown request
+2021-11-29 09:56:49.989 EET [19870] LOG:  background worker "logical replication launcher" (PID 19877) exited with exit code 1
+2021-11-29 09:56:49.989 EET [19872] LOG:  shutting down
+2021-11-29 09:56:50.004 EET [19870] LOG:  database system is shut down
