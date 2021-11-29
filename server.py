@@ -109,7 +109,7 @@ def login_form():
         return redirect('/')
     elif email_check and password_check:
         time_punch_list = crud.get_time_punch_object_list(email)
-        return render_template("updated-library.html", time_punch_list=time_punch_list)
+        return render_template("calendar.html", time_punch_list=time_punch_list)
     else:
         flash("Sorry that is not a valid login email or password.  Please try again, or register as a new user.")
         return redirect('/')
@@ -121,8 +121,16 @@ def go_to_user_calendar_page():
 
     email = session['email']
 
-
     return render_template("calendar.html")
+
+
+@app.route('/day_calendar')
+def go_to_user_day_calendar_page():
+    """Takes user to their day calendar page using date selected on month calendar page."""
+
+    email = session['email']
+
+    return render_template("dayCalendar.html")
 
 
 @app.route('/time_punch_creation', methods=["POST"])
@@ -178,7 +186,7 @@ def delete_time_punch_from_calendar(time_punch_id):
     return redirect("/calendar")
 
 
-@app.route('/edit_time_punch/<time_punch_id>')
+@app.route("/edit_time_punch")
 def edit_time_punch_form(time_punch_id):
     """Takes user to page to correct/change/edit time punch."""
 
