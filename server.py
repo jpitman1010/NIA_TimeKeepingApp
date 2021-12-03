@@ -1,4 +1,4 @@
-"""Server for creating time punches."""
+"""Server for creating time entryes."""
 from time import time
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from model import connect_to_db
@@ -9,6 +9,7 @@ from jinja2 import StrictUndefined
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -108,20 +109,35 @@ def login_form():
         flash("Sorry that is not a valid login email or password.")
         return redirect('/')
     elif email_check and password_check:
-        time_punch_list = crud.get_time_punch_object_list(email)
-        return render_template("calendar.html", time_punch_list=time_punch_list)
+        time_entry_list = crud.get_time_entry_object_list(email)
+        date = datetime.now().day
+        month = datetime.now().month
+        year = datetime.now().year
+        print('month-date-year =', month, date, year)
+        time_entry_by_date = crud.get_time_entries_for_date_selected(
+            email, date, month, year)
+        session['time_entry_by_date'] = time_entry_by_date
+        return render_template("calendar.html", time_entry_by_date=time_entry_by_date, time_entry_list=time_entry_list)
     else:
         flash("Sorry that is not a valid login email or password.  Please try again, or register as a new user.")
         return redirect('/')
 
 
-@app.route('/calendar')
+@app.route('/calendar', methods=["POST", "GET"])
 def go_to_user_calendar_page():
     """Takes user to their calendar page."""
 
     email = session['email']
+    date_selected = request.form.get('date')
+    month_selected = request.form.get('month')
+    year_selected = request.form.get('year')
 
-    return render_template("calendar.html")
+    time_entry_by_date = crud.get_time_entries_for_date_selected(
+        email, date_selected, month_selected, year_selected)
+    print(time_entry_by_date)
+    session['time_entry_by_date'] = time_entry_by_date
+
+    return render_template("calendar.html", time_entry_by_date=time_entry_by_date)
 
 
 @app.route('/day_calendar')
@@ -133,67 +149,67 @@ def go_to_user_day_calendar_page():
     return render_template("dayCalendar.html")
 
 
-@app.route('/time_punch_creation', methods=["POST"])
-def create_time_punch():
-    """Creates time punch."""
+@app.route('/time_entry_creation', methods=["POST"])
+def create_time_entry():
+    """Creates time entry."""
 
-    print("this is the start of post time punch creation route")
+    print("this is the start of post time entry creation route")
 
     email = session['email']
     comments = request.form.get('comments')
-    time_punch = crud.create_time_punch(email, comments)
-    app.logger.info(time_punch, "time punch")
+    time_entry = request.form.get('time_entry')
+    created_time_entry = crud.create_time_entry(email, time_entry, comments)
+    app.logger.info(time_entry, "time entry")
 
     print("I am done pulling things from requests")
 
-    time_punch_id = crud.get_time_punch_id(email)
-    print("this is the time punch ID", time_punch_id)
-    page_number = crud.get_page_number(page_id)
+    time_entry_id = crud.get_time_entry_id(email)
+    print("this is the time entry ID", time_entry_id)
 
-    return redirect(url_for('view_created_time_punch'))
-
-
-@app.route('/time_punch/<time_punch_id>/add_time_punch/<db_time_punch>')
-def view_created_time_punch(time_punch_id, db_time_punch):
-    """Takes user to created time punch page."""
-
-    return render_template('created_time_punch.html')
+    return redirect(url_for('view_created_time_entry'))
 
 
-@app.route('/save_and_complete_time_punch')
-def save_completed_time_punch():
-    """Completes time punch creation and shows completed time punch in calendar."""
+@app.route('/time_entry_added')
+def view_created_time_entry():
+    """Takes user to created time entry page."""
 
     email = session['email']
-    comments = session['comments']
-    time_punch_id = session['time_punch_id']
-    user_id = crud.get_user_id(email)
-    time_punch_object_list = crud.get_time_punch_object_list(email)
+    time_entry_object_list = crud.get_time_entry_object_list(email)
+    print('time_entry_object_list', time_entry_object_list)
+    date_selected = request.form.get('date')
+    month_selected = request.form.get('month')
+    year_selected = request.form.get('year')
 
-    return render_template("calendar.html", email=email, comments=comments, time_punch_id=time_punch_id, user_id=user_id, time_punch_object_list=time_punch_object_list)
+    time_entry_by_date = crud.get_time_entries_for_date_selected(
+        email, date_selected, month_selected, year_selected)
+    print('time_entry_by_date on save and complete time entry server.py =',
+          time_entry_by_date)
+    session['time_entry_by_date'] = time_entry_by_date
+
+    return render_template("calendar.html", email=email, time_entry_by_date=time_entry_by_date,  time_entry_object_list=time_entry_object_list)
 
 
-@app.route("/delete_time_punch/<time_punch_id>")
-def delete_time_punch_from_calendar(time_punch_id):
-    """Deletes a selected time punch."""
+@app.route("/delete_time_entry/<time_entry_id>")
+def delete_time_entry_from_calendar(time_entry_id):
+    """Deletes a selected time entry."""
 
-    delete_time_punch = crud.delete_time_punch(time_punch_id)
-    app.logger.info("delete_time_punch just called,", delete_time_punch)
+    delete_time_entry = crud.delete_time_entry(time_entry_id)
+    app.logger.info("delete_time_entry just called,", delete_time_entry)
     email = session['email']
     user_id = crud.get_user_id(email)
-    time_punch_list = crud.get_time_punch_object_list(email)
+    time_entry_list = crud.get_time_entry_object_list(email)
 
     return redirect("/calendar")
 
 
-@app.route("/edit_time_punch")
-def edit_time_punch_form(time_punch_id):
-    """Takes user to page to correct/change/edit time punch."""
+@app.route("/edit_time_entry")
+def edit_time_entry_form(time_entry_id):
+    """Takes user to page to correct/change/edit time entry."""
 
     email = session['email']
-    time_punch_object = crud.get_time_punch_object(email, time_punch_id)
+    time_entry_object = crud.get_time_entry_object(email, time_entry_id)
 
-    return render_template("edit_time_punch.html", time_punch_object=time_punch_object)
+    return render_template("edit_time_entry.html", time_entry_object=time_entry_object)
 
 
 @app.route('/admin_page')

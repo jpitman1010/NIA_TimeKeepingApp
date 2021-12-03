@@ -10,7 +10,7 @@ Body {
 
 }
 
-.container {
+.container-not-calendar {
     height: 100%;
     position: relative;
 }
@@ -46,10 +46,10 @@ Body {
     justify-content: center;
     display: inline-block;
 }
-.button {
+.button-not-calendar {
     border: none;
     color: white;
-    padding: 20px 32px;
+    /* padding: 20px 32px; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -57,6 +57,7 @@ Body {
     border-radius: 3rem;
     margin:10px;
     font-weight: 500;
+    position: relative;
 }
 
 .registerButton {

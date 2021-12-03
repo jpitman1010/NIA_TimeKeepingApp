@@ -37,27 +37,28 @@ class User(db.Model):
         return f"<User ID={self.id} Email={self.email}, password={self.password}, author={self.fname}{self.lname}, User Photo={self.photo}>"
 
 
-class TimePunches(db.Model):
-    """Time Punch Table."""
+class TimeEntry(db.Model):
+    """Time Entry Table."""
 
-    __tablename__ = "time_punch"
+    __tablename__ = "time_entry"
 
     id = db.Column(db.Integer,
                    autoincrement=True,
                    primary_key=True,)
-
     comments = db.Column(db.String,)
+    time_entry = db.Column(db.DateTime,)
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.id"),)
     created_date = db.Column(db.DateTime, default=datetime.datetime.utcnow,)
-    user_name = db.relationship('User', backref='TimePunches',)
+    user_name = db.relationship('User', backref='TimeEntry',)
 
     def __repr__(self):
-        """Shows info about the time punches."""
+        """Shows info about the time entryes."""
 
-        return f"<User ID = {self.user_id}, User Name={self.id}, comments={self.comments}, Time Punch Details={self.created_date}.>"
+        return f"<Time Entry ID = {self.id}, User ID={self.user_id}, comments={self.comments}, Time Entry Created Date={self.created_date}, Time Entry={self.time_entry}.>"
 
 
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
+    db.create_all()

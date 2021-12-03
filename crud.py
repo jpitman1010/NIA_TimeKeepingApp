@@ -1,6 +1,6 @@
 """Server operations. CRUD == Create,Read,Update,Delete."""
 
-from model import TimePunches, User, db, connect_to_db
+from model import TimeEntry, User, db, connect_to_db
 
 
 def create_user(email, password, fname, lname, photo):
@@ -60,65 +60,83 @@ def password_check(email, password):
     return not not valid_password
 
 
-def create_time_punch(email, comments):
-    """Creates and returns a time punch."""
+def create_time_entry(email, time_entry, comments):
+    """Creates and returns a time entry."""
 
-    user_id = db.session.query(User.id).filter_by(email=email).first()
-    time_punch = TimePunches(user_id=user_id, comments=comments)
+    user_id = get_user_id(email)
+    time_entry = TimeEntry(
+        user_id=user_id, time_entry=time_entry, comments=comments)
 
-    db.session.add(time_punch)
+    db.session.add(time_entry)
     db.session.commit()
 
-    new_time_punch = db.session.query(TimePunches.created_date).last()
-    return new_time_punch
+    return time_entry
 
 
-def get_time_punch_id(email):
-    """Gets time punch id by email."""
-
-    user_id = get_user_id(email)
-    time_punch_id = db.session.query(
-        TimePunches.id).filter_by(user_id=user_id).first()
-
-    return time_punch_id[0]
-
-
-def get_time_punch_object(email, time_punch_id):
-    """Gets time punch list."""
+def get_time_entry_id(email):
+    """Gets time entry id by email."""
 
     user_id = get_user_id(email)
-    time_punches = TimePunches.query.filter_by(user_id=user_id).all()
+    time_entry_id = db.session.query(
+        TimeEntry.id).filter_by(user_id=user_id).first()
 
-    return time_punches
+    return time_entry_id[0]
 
 
-def get_time_punch_object_list(email):
-    """Gets time punch list."""
+def get_time_entry_object_list(email, time_entry_id):
+    """Gets time entry list."""
 
     user_id = get_user_id(email)
-    time_punches = TimePunches.query.filter_by(user_id=user_id).all()
+    time_entries = TimeEntries.query.filter_by(user_id=user_id).all()
 
-    return time_punches
+    return time_entries
 
 
-def delete_time_punch(time_punch_id):
-    """Deletes a time punch that user no longer wishes to have in time log."""
+def get_time_entry_object_list(email):
+    """Gets time entry list."""
 
-    deleted_time_punch = db.session.query(
-        TimePunches).filter_by(time_punch_id=time_punch_id).all()
-    print(deleted_time_punch,
-          "Delete time punch in delete_time_punches(time_punch_id) crud fcn")
-    db.session.delete(deleted_time_punch)
+    user_id = get_user_id(email)
+    time_entries = TimeEntry.query.filter_by(user_id=user_id).all()
+
+    return time_entries
+
+
+def get_time_entries_for_date_selected(email, date, month, year):
+    """Get time entry object list for date selected)"""
+
+    user_id = get_user_id(email)
+    time_entry_list = db.session.query(
+        TimeEntry.time_entry).filter_by(user_id=user_id).all()
+    print(time_entry_list)
+    time_entry_by_date = []
+    # for time_entry in time_entry_object_list:
+    #     print(time_entry)
+    #     if time_entry['year'] == year:
+    #         if time_entry['month'] == month:
+    #             if time_entry['date'] == date:
+    #                 time_entry_by_date.append(time_entry)
+
+    return time_entry_by_date
+
+
+def delete_time_entry(time_entry_id):
+    """Deletes a time entry that user no longer wishes to have in time log."""
+
+    deleted_time_entry = db.session.query(
+        TimeEntry).filter_by(time_entry_id=time_entry_id).all()
+    print(deleted_time_entry,
+          "Delete time entry in delete_time_entries(time_entry_id) crud fcn")
+    db.session.delete(deleted_time_entry)
     db.session.commit()
 
-    return deleted_time_punch
+    return deleted_time_entry
 
 
 def admin_check(email):
     """Checks database to see if user that is attempting to enter admin page is listed as admin."""
 
-
-    admin_confirmation = db.session.query(User.admin).filter_by(email=email).first()
+    admin_confirmation = db.session.query(
+        User.admin).filter_by(email=email).first()
 
     return admin_confirmation
 
