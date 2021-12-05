@@ -10,6 +10,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from datetime import datetime
+import json
 
 
 app = Flask(__name__)
@@ -55,13 +56,6 @@ def user_reg_post_intake():
     print(fname)
     lname = request.form.get('lname')
     print(lname)
-
-    # print(request.files, "request-files image-upload")
-    # file = request.files['image-upload']
-    # app.logger.info('this is the file app logger', file)
-    # response = cloudinary.uploader.upload(file)
-    # photo = response['url']
-    # app.logger.info('this is the photo app logger', photo)
 
     photo = 'photo text place holder'
     print(email)
@@ -128,13 +122,13 @@ def go_to_user_calendar_page():
     """Takes user to their calendar page."""
 
     email = session['email']
-    date_selected = request.form.get('date')
-    month_selected = request.form.get('month')
-    year_selected = request.form.get('year')
+    month = 'September'
+    date = 3
+    year = 2022
 
     time_entry_by_date = crud.get_time_entries_for_date_selected(
-        email, date_selected, month_selected, year_selected)
-    print(time_entry_by_date)
+        email, date, month, year)
+    print('time-entries-by date ===', time_entry_by_date)
     session['time_entry_by_date'] = time_entry_by_date
 
     return render_template("calendar.html", time_entry_by_date=time_entry_by_date)
@@ -153,43 +147,40 @@ def go_to_user_day_calendar_page():
 def create_time_entry():
     """Creates time entry."""
 
-    print("this is the start of post time entry creation route")
-
     email = session['email']
+    # date_selected = request.form.get('date')
+    # month_selected = request.form.get('month')
+    # year_selected = request.form.get('year')
+    time_hr_to_add = str(request.form.get('hours'))
+    time_min_to_add = str(request.form.get('minutes'))
+
+    time_entry = time_hr_to_add + ":" + time_min_to_add
+    print('time entry ======= ', time_entry, type(time_entry))
     comments = request.form.get('comments')
-    time_entry = request.form.get('time_entry')
-    created_time_entry = crud.create_time_entry(email, time_entry, comments)
-    app.logger.info(time_entry, "time entry")
 
-    print("I am done pulling things from requests")
-
-    time_entry_id = crud.get_time_entry_id(email)
-    print("this is the time entry ID", time_entry_id)
+    time_entered = crud.create_time_entry(email, time_entry, comments)
 
     return redirect(url_for('view_created_time_entry'))
 
 
-@app.route('/time_entry_added')
+@ app.route('/time_entry_added')
 def view_created_time_entry():
     """Takes user to created time entry page."""
 
     email = session['email']
+
+    # time_entry_by_date = crud.get_time_entries_for_date_selected(
+    #     email, date_selected, month_selected, year_selected)
+    # print('time_entry_by_date on save and complete time entry server.py =',
+    #       time_entry_by_date)
     time_entry_object_list = crud.get_time_entry_object_list(email)
     print('time_entry_object_list', time_entry_object_list)
-    date_selected = request.form.get('date')
-    month_selected = request.form.get('month')
-    year_selected = request.form.get('year')
+    # session['time_entry_by_date'] = time_entry_by_date
 
-    time_entry_by_date = crud.get_time_entries_for_date_selected(
-        email, date_selected, month_selected, year_selected)
-    print('time_entry_by_date on save and complete time entry server.py =',
-          time_entry_by_date)
-    session['time_entry_by_date'] = time_entry_by_date
-
-    return render_template("calendar.html", email=email, time_entry_by_date=time_entry_by_date,  time_entry_object_list=time_entry_object_list)
+    return render_template("calendar.html", email=email, time_entry_object_list=time_entry_object_list)
 
 
-@app.route("/delete_time_entry/<time_entry_id>")
+@ app.route("/delete_time_entry/<time_entry_id>")
 def delete_time_entry_from_calendar(time_entry_id):
     """Deletes a selected time entry."""
 
@@ -202,7 +193,7 @@ def delete_time_entry_from_calendar(time_entry_id):
     return redirect("/calendar")
 
 
-@app.route("/edit_time_entry")
+@ app.route("/edit_time_entry")
 def edit_time_entry_form(time_entry_id):
     """Takes user to page to correct/change/edit time entry."""
 
@@ -212,7 +203,7 @@ def edit_time_entry_form(time_entry_id):
     return render_template("edit_time_entry.html", time_entry_object=time_entry_object)
 
 
-@app.route('/admin_page')
+@ app.route('/admin_page')
 def admin_page():
     """Checks admin access rights and if admin, takes administrator to the admin management page."""
 

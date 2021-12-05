@@ -8145,7 +8145,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #fc7fb2; }
+  color: blue; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8160,7 +8160,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .bg-primary {
-  background: #fc7fb2 !important; }
+  background: blue !important; }
 
 .ftco-section {
   padding: 1em 0; }
@@ -8188,7 +8188,7 @@ h1, h2, h3, h4, h5,
   height: 500px;
   position: relative;
   margin: 20px auto;
-  background: #fc7fb2; }
+  background: blue; }
 
 /*  Events display */
 .events-container {
@@ -8214,10 +8214,10 @@ h1, h2, h3, h4, h5,
   padding: 20px 0;
   max-width: 100%;
   display: block;
-  background: #fc7fb2;
+  background: blue;
   border: none !important;
   margin: 20px;
-  color: #fff;
+  color: white;
   margin-left: 12px;
   border-radius: 4px;
   margin: 0; }
@@ -8228,7 +8228,7 @@ h1, h2, h3, h4, h5,
   font-size: 1rem; }
 
 .event-count {
-  color: #fc7fb2;
+  color: blue;
   text-align: right; }
 
 .event-name {
@@ -8236,7 +8236,7 @@ h1, h2, h3, h4, h5,
   text-align: left; }
 
 .event-cancelled {
-  color: #fc7fb2;
+  color: red;
   text-align: right; }
 
 /*  Calendar wrapper */
@@ -8252,6 +8252,16 @@ h1, h2, h3, h4, h5,
   padding: 20px;
   /* float: right; */
   float: none; }
+
+  .today {
+    border: 1px solid green;
+    border-radius: 2rem;
+  }
+
+  .selected_date {
+    color: blue
+  }
+
 
   @media (max-width: 991.98px) {
     .calendar-container {
@@ -8304,7 +8314,7 @@ h1, h2, h3, h4, h5,
       -o-transition: none;
       transition: none; } }
   .left-button:hover, .right-button:hover {
-    color: #fc7fb2 !important; }
+    color: blue !important; }
 
 .left-button {
   left: 0; }
@@ -8328,10 +8338,12 @@ h1, h2, h3, h4, h5,
   transition: .2s ease all;
   color: white;
   border: none;
-  background: hsl(240, 100%, 50%); 
-  .button.button-white,
+  background: hsl(240, 100%, 50%); }
+
+  .button.button-white {
     background: hsl(240, 100%, 50%);
-    color: #000; 
+    color: #000; }
+
   .button:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -8341,16 +8353,17 @@ h1, h2, h3, h4, h5,
   background: #000; }
 
 #add-button {
-  display: block;
+  display: inline-block;
   position: relative;
+  margin-bottom: 1vw;
    }
 
-#add-button:hover, #ok-button:hover, #cancel-button:hover {
+#add-button:hover, #ok-button:hover, #cancel-button:hover , #day-calendar-button:hover, #change-button:hover{
   -webkit-transform: scale(1.03);
   -ms-transform: scale(1.03);
   transform: scale(1.03); }
 
-#add-button:active, #ok-button:active, #cancel-button:active {
+#add-button:active, #ok-button:active, #cancel-button:active,  #day-calendar-button: active, #change-button:active {
   -webkit-transform: translateY(3px) scale(0.97);
   -ms-transform: translateY(3px) scale(0.97);
   transform: translateY(3px) scale(0.97); }
@@ -8392,23 +8405,24 @@ h1, h2, h3, h4, h5,
 
 .active-month {
   font-weight: 700;
-  color: hsl(234, 98%, 50%);
-  background-color: green; }
+  color: white;
+  color: blue;
+  border-bottom: 2px solid blue;}
+  
 
 .month:hover {
   color: #7ffcdd; }
 
 /*  Dates table */
 .table-date {
-  cursor: pointer;
-  color: #2b2b2b;
+  cursor: grabbing;
+  color: var(--gray-dark);
   height: 26px;
   width: 26px;
   font-size: 15px;
   padding: 10px;
   line-height: 26px;
   text-align: center;
-  border-radius: 50%;
   border: 1px solid transparent;
   -webkit-transition: all 250ms;
   -o-transition: all 250ms;
@@ -8433,24 +8447,25 @@ h1, h2, h3, h4, h5,
 
 
 .event-date {
-  border-color: #fc7fb2;
-  background: #fc7fb2;
-  color: #fff; }
-  .event-date:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    content: '';
-    background: #ffc107;
-    border: 1px solid white; }
+  border-color: blue;
+  background: white;
+  color: blue; }
+
+.event-date:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  content: '';
+  background: #ffc107;
+  border: 1px solid white; }
 
 .active-date {
-  color: rgb(0, 17, 248); }
+  background-color: blue;}
 .active-date:before {
-  background:  hsl(234, 87%, 70%); }
+  background: white}
 
 .event-date.active-date {
   background: transparent;
@@ -8459,7 +8474,8 @@ h1, h2, h3, h4, h5,
 /* input dialog */
 .dialog {
   z-index: 5;
-  background: #fc7fb2;
+  background: white;
+  border:black 1px;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -8506,4 +8522,4 @@ h1, h2, h3, h4, h5,
   border-color: #fff; }
 
 .error-input {
-  border-color: #fc7fb2; }
+  border-color: red; }

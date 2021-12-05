@@ -46,7 +46,7 @@ class TimeEntry(db.Model):
                    autoincrement=True,
                    primary_key=True,)
     comments = db.Column(db.String,)
-    time_entry = db.Column(db.DateTime,)
+    time_entry = db.Column(db.String,)
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.id"),)
     created_date = db.Column(db.DateTime, default=datetime.datetime.utcnow,)

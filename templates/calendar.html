@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="../static/css/style.css">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </head>
@@ -67,22 +68,22 @@
 										</tbody>
 									</table>
 								</div>
-								<button class="add-button button" id="add-button">Add Clocking</button>
-								<button class="add-button button" id="day-calendar-button">View Day
+								<button class="add-button button" id="add-button" name="add-button">Add Clocking</button>
+								<button class="add-button button" id="day-calendar-button" name="day-calendar-button">Day
 									Calendar</button>
-								<button class="add-button button" id="change-button" action="/edit_time_punch">Change
+								<button class="add-button button" id="change-button" name="change-button"">Change
 									Clocking</button>
 							</div>
 						</div>
 						<div class="events-container">
-							{% if time_entry_by_date != [] %}
-							{% for event in time_entry_by_date %}
+							<!-- {% if time_entry_by_date != [] %}
+							{% for event in time_entry_by_date %} -->
 							<!-- {% if event.created_date == today %} -->
-							<div>'comment:' + {{event.comment}} + ' time_entry = ' + {{event.time_entry}} + ' created on: ' + {{event.created_date}} </div>
-							 <!-- {% endif %} -->
+							<!-- <div>'comment:' + {{event.comment}} + ' time_entry = ' + {{event.time_entry}} + ' created on: ' + {{event.created_date}} </div>
+							 {% endif %}
 							 {% endfor %}
 							 {% else %} <div></div>
-							 {% endif %}
+							 {% endif %} -->
 
 						</div>
 						<div class="dialog" id="dialog">
@@ -90,13 +91,11 @@
 							<form class="form" id="form" action="/time_entry_creation" method="POST">
 								<div class="form-container" align="center">
 									<label class="form-label" id="valueFromMyButton" for="comment">Comments</label>
-									<input class="input" type="text" id="comment" maxlength="36"><br>
+									<input class="input" type="text" id="name" name="comments" maxlength="36"><br>
 									<label class="form-label" id="valueFromMyButton" for="count">HH</label>
-									<input class="input timepicker-hours" style="max-width: 63px;">
-									<label class="form-label" id="valueFromMyButton" for="count">Min</label>
-									<input class="input timepicker-first-min" style="max-width: 63px;">
-									<label class="form-label" id="valueFromMyButton" for="count">Min</label>
-									<input class="nput timepicker-second-min" style="max-width: 63px;">
+									<input  id="hours" name="hours" type="number" max={2} min={2} style="max-width: 63px;">
+									<label class="form-label" id="valueFromMyButton" for="count" >Min</label>
+									<input id="minutes" name="minutes" type="number" max={2} min={2} style="max-width: 63px;">
 									<br>
 									<input type="button" value="Cancel" class="button" id="cancel-button"
 										style="margin-top:2vw;">
@@ -113,10 +112,10 @@
 
 
 
-	<script src="../static/js/jquery.min.js"></script>
+	<!-- <script src="../static/js/jquery.min.js"></script> -->
 	<script src="../static/js/popper.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/main.js"></script>
+	<script src="../static/js/scripts.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 
