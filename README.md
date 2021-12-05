@@ -15,7 +15,6 @@
 # API's Used:
 
 - Cloudinary API
-- St. PageFlip API
 
 # What the web app can do:
 
